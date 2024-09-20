@@ -1,0 +1,26 @@
+Increase EBS Storage for EC2 Instance 
+
+Approach- 1. Using Modify Volume in AWS console
+1.	Login to AWS Management Console
+2.	In EC2 Dashboard go to Volumes section
+3.	Click on the volume which Storage size we have to Increase by checking Attached resource (EC2 instance) 
+4.	After That click on that volume Id to navigate the volume, we have to change
+5.	In the volume click on modify Volume to increase the volume size
+6.	In Modify Section we can modify the volume details as per requirements 
+7.	We can modify 1) Volume type 2) size in GiB 3) IOPS 4) Throughput in MiB/s then click on modify  
+8.	Check the list of all the storage block devices connected to a system using command --------> lsblk
+9.	To check the list of mounted volume attached to instance ----------> df -h
+10.	Create directory for mount point -------- > sudo mkdir /mnt/xvdb
+11.	Mount the volume in /mnt/xvdb folder when we go into the folder it will visible ---------> sudo mount /dev/xvdb /mnt/xvdb
+12.	Check volume mounted or not ----------->df -h
+13.	Make the mount permanent by editing fstab file ---------->  sudo nano /etc/fstab
+14.	Add new entry to fstab file ------> /dev/xvdb /mnt/xvdb ext4 defaults 0 2
+15.	check and mount permanently all file system listed ----------> sudo mount -a
+16.	Reboot the system- and check the volume mounted --------> sudo reboot 
+Approach- 2. Using Snapshot 
+Step 1: To increase the size of EBS first take snapshot 
+Step 2: Snapshot will create we can attach anywhere in region as per requirements
+Step 3: Now From this Snapshot create EBS Volume of required Size
+Step 4: After Creating Required size EBS volume Attach to the EC2 Instance 
+Step 5: Mount the volume permanently 
+
